@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GPX Track Uploader</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    #map {
+      height: 70vh;
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .upload-container {
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: #f5f5f5;
+      border-radius: 8px;
+    }
+
+    .track-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 15px;
+    }
+
+    .track-item {
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .track-item:hover {
+      background-color: #efefef;
+    }
+
+    .track-controls {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      padding: 8px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button.remove {
+      background-color: #f44336;
+    }
+
+    .upload-btn {
+      margin-left: 10px;
+    }
+
+    .instructions {
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: #e6f7ff;
+      border-left: 4px solid #1890ff;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>GPX Track Uploader</h1>
+
+  <div class="instructions">
+    <p>Upload your GPX tracks to visualize them on the map. All processing happens in your browser - files are not sent
+      to any server.</p>
+  </div>
+
+  <div class="upload-container">
+    <input type="file" id="gpx-upload" accept=".gpx" multiple />
+    <button class="upload-btn" id="upload-button">Upload GPX Files</button>
+    <div id="progress-container" style="display: none;">
+      <div class="progress-bar-container">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+      <div id="progress-text">Processing files: 0/0</div>
+    </div>
+  </div>
+
+  <div id="map"></div>
+
+  <h2>Uploaded Tracks</h2>
+  <div class="filter-container">
+    <input type="text" id="track-search" placeholder="Search tracks...">
+    <button id="load-all-button">Load All Tracks</button>
+  </div>
+  <div class="track-list" id="tracks"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-gpx@1.7.0/gpx.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
